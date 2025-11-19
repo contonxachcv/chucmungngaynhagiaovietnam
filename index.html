@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title>Happy Teachers' Day!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="bubbles" aria-hidden="true">
+        <span class="bubble small l-5"></span>
+        <span class="bubble medium l-15"></span>
+        <span class="bubble large l-25"></span>
+        <span class="bubble medium l-35"></span>
+        <span class="bubble small l-45"></span>
+        <span class="bubble large l-55"></span>
+        <span class="bubble small l-65"></span>
+        <span class="bubble medium l-75"></span>
+        <span class="bubble large l-85"></span>
+        <span class="bubble small l-92"></span>
+    </div>
+    <div class="falling-flowers" aria-hidden="true">
+        <span class="falling-flower" style="left: 5%; animation-delay: 0s; animation-duration: 8s;">🌸</span>
+        <span class="falling-flower" style="left: 15%; animation-delay: 1s; animation-duration: 9s;">🌺</span>
+        <span class="falling-flower" style="left: 25%; animation-delay: 2s; animation-duration: 7.5s;">🌸</span>
+        <span class="falling-flower" style="left: 35%; animation-delay: 0.5s; animation-duration: 8.5s;">🌼</span>
+        <span class="falling-flower" style="left: 45%; animation-delay: 1.5s; animation-duration: 9s;">🌺</span>
+        <span class="falling-flower" style="left: 55%; animation-delay: 0.8s; animation-duration: 8s;">🌸</span>
+        <span class="falling-flower" style="left: 65%; animation-delay: 1.2s; animation-duration: 7.8s;">🌼</span>
+        <span class="falling-flower" style="left: 75%; animation-delay: 0.3s; animation-duration: 9.2s;">🌺</span>
+        <span class="falling-flower" style="left: 85%; animation-delay: 1.8s; animation-duration: 8.3s;">🌸</span>
+        <span class="falling-flower" style="left: 92%; animation-delay: 0.1s; animation-duration: 7.5s;">🌼</span>
+    </div>
+    <h1 class="valentine">Happy Teachers' Day 20/11</h1>
+    <div class="envelope-wrapper">
+        <div id="envelope" class="close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+        </div>
+    </div>
+    <div id="letter-modal" class="letter-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal">&times;</button>
+            <h2>Teachers' day 💌</h2>
+            <div id="typewriter-text" class="typewriter-container"></div>
+        </div>
+    </div>
+    <div class="reset">
+        <button id="open">Mở thư</button>
+    </div>
+    <div>
+        <audio id="myAudio" preload="auto" loop playsinline autoplay>
+            <source src="nhac.mp3" type="audio/mp3">
+            Trình duyệt của bạn không hỗ trợ thẻ audio.
+        </audio>
+
+    </div>
+        <script src="main.js"></script>
+        <script>
+            setTimeout(() => {
+                // Create a fade overlay
+                const fadeDiv = document.createElement('div');
+                fadeDiv.style.position = 'fixed';
+                fadeDiv.style.top = 0;
+                fadeDiv.style.left = 0;
+                fadeDiv.style.width = '100vw';
+                fadeDiv.style.height = '100vh';
+                fadeDiv.style.background = '#000';
+                fadeDiv.style.opacity = 0;
+                fadeDiv.style.transition = 'opacity 1s';
+                fadeDiv.style.zIndex = 9999;
+                document.body.appendChild(fadeDiv);
+                // Start fade
+                setTimeout(() => {
+                    fadeDiv.style.opacity = 1;
+                }, 10);
+                // After 2s, redirect
+                setTimeout(() => {
+                    window.location.href = "teacher.html";
+                }, 1010);
+            }, 55000); // 55 giây
+        </script>
+</body>
+</html>
+<script>
+    setTimeout(() => {
+        window.location.href = "teacher.html";
+    }, 55000); // 55000ms = 55 giây
+</script>
