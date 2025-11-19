@@ -1,0 +1,782 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    /* Animated soft pink gradient */
+    background: linear-gradient(120deg, #f0c2d9, #ffd1e8, #f3d3e7, #ffd7ef);
+    background-size: 300% 300%;
+    animation: bg-shift 12s ease-in-out infinite;
+    overflow: hidden;
+    /* keep bubbles inside */
+}
+
+@keyframes bg-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Floating bubbles */
+.bubbles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    /* behind content */
+}
+
+/* Falling flowers */
+.falling-flowers {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.falling-flower {
+    position: absolute;
+    top: -50px;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    animation: fall linear infinite;
+    filter: drop-shadow(0 0 2px rgba(255, 105, 180, 0.3));
+}
+
+@keyframes fall {
+    0% {
+        top: -50px;
+        opacity: 0;
+        transform: translateX(0) rotate(0deg);
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        top: 100vh;
+        opacity: 0;
+        transform: translateX(50px) rotate(360deg);
+    }
+}
+
+.bubble {
+    position: absolute;
+    bottom: -120px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.15));
+    border-radius: 50%;
+    filter: blur(0.2px);
+    animation: rise 14s linear infinite;
+    opacity: 0.8;
+}
+
+.bubble:nth-child(odd) {
+    opacity: 0.6;
+    filter: blur(0.5px);
+}
+
+.bubble.small {
+    width: 10px;
+    height: 10px;
+    animation-duration: 10s;
+}
+
+.bubble.medium {
+    width: 18px;
+    height: 18px;
+    animation-duration: 13s;
+}
+
+.bubble.large {
+    width: 28px;
+    height: 28px;
+    animation-duration: 16s;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+
+    100% {
+        transform: translateY(-110vh) translateX(-20px);
+    }
+}
+
+/* position utilities for bubbles */
+.l-5 {
+    left: 5%;
+}
+
+.l-15 {
+    left: 15%;
+}
+
+.l-25 {
+    left: 25%;
+}
+
+.l-35 {
+    left: 35%;
+}
+
+.l-45 {
+    left: 45%;
+}
+
+.l-55 {
+    left: 55%;
+}
+
+.l-65 {
+    left: 65%;
+}
+
+.l-75 {
+    left: 75%;
+}
+
+.l-85 {
+    left: 85%;
+}
+
+.l-92 {
+    left: 92%;
+}
+
+#envelope {
+    position: relative;
+    height: 180px;
+    width: 280px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 40%;
+    background-color: #ff5c8a;
+    /* hồng đậm thay cho đỏ */
+    box-shadow: 0 4px 20px rgba(255, 92, 138, 0.35);
+}
+
+#envelope:hover {
+    cursor: pointer;
+}
+
+.front {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 3;
+}
+
+.flap {
+    border-top: 98px solid #ff5c8a;
+    /* hồng đậm */
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 82px solid transparent;
+    transform-origin: top;
+}
+
+.pocket {
+    border-left: 140px solid #ff9ab3;
+    /* hồng nhạt */
+    border-right: 140px solid #ff9ab3;
+    border-bottom: 90px solid #ffc2d1;
+    /* hồng rất nhạt */
+    border-top: 90px solid transparent;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.letter {
+    position: relative;
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    top: 5%;
+    border-radius: 10px;
+    box-shadow: 0 2px 26px rgba(0, 0, 0, .12);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.letter:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.words {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    height: 14%;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.line1 {
+    top: 15%;
+}
+
+.line2 {
+    top: 30%;
+}
+
+.line3 {
+    top: 50%;
+    text-align: center;
+}
+
+.line4 {
+    top: 65%;
+    text-align: center;
+}
+
+.open .flap {
+    transform: rotatex(180deg);
+    transition: transform 0.4s ease, z-index 0.6s;
+    z-index: 1;
+}
+
+.close .flap {
+    transform: rotatex(0deg);
+    transition: transform 0.4s 0.6s ease, z-index 1s;
+    z-index: 5;
+}
+
+.open .letter {
+    transform: translatey(-120px) scale(0.88);
+    transition: transform 0.4s 0.6s ease, z-index 0.6s;
+    z-index: 2;
+}
+
+.close .letter {
+    transform: translatey(0deg);
+    transition: transform 0.4s ease, z-index 1s;
+    z-index: 1;
+}
+
+.hearts {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.heart {
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+}
+
+.heart:before,
+.heart:after {
+    position: absolute;
+    content: "";
+    background: #ff5c8a;
+    /* tim hồng */
+    width: 50px;
+    height: 80px;
+    left: 50px;
+    top: 0;
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+.close .heart {
+    opacity: 0;
+    animation: none;
+}
+
+.a1 {
+    left: 20%;
+    transform: scale(0.6);
+    opacity: 1;
+    animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+    animation-fill-mode: forwards;
+    animation-delay: 0.7s;
+}
+
+.a2 {
+    left: 55%;
+    transform: scale(1);
+    opacity: 1;
+    animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+    animation-fill-mode: forwards;
+    animation-delay: 0.7s;
+}
+
+.a3 {
+    left: 10%;
+    transform: scale(0.8);
+    opacity: 1;
+    animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+    animation-fill-mode: forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes slideUp {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: -600px;
+    }
+}
+
+@keyframes sideSway {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: 50px;
+    }
+}
+
+.reset {
+    text-align: center;
+}
+
+.reset button {
+    font-weight: 800;
+    font-style: normal;
+    transition: all 0.1s linear;
+    background-color: transparent;
+    border: solid 2px #FF6863;
+    border-radius: 4px;
+    color: #FF6863;
+    display: inline-block;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 20px;
+    margin-top: 110px;
+    padding: 10px;
+    line-height: 2em;
+    text-decoration: none;
+    min-width: 150px;
+    outline: none;
+}
+
+.reset button:hover {
+    background-color: #f1add3;
+    cursor: pointer;
+    color: white;
+}
+
+.valentine {
+    position: relative;
+    z-index: 1;
+    /* nổi lên trên lớp bubbles */
+    text-align: center;
+    font-family: 'Great Vibes', 'Dancing Script', 'Segoe Script', 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(34px, 7vw, 72px);
+    letter-spacing: 0.2px;
+    color: #ffffff;
+    text-shadow:
+        0 2px 4px rgba(255, 92, 138, 0.45),
+        /* đổ bóng gần */
+        0 8px 24px rgba(255, 20, 147, 0.35);
+    /* glow hồng mềm */
+    margin: 12px 16px 20px;
+}
+
+/* Modal thư */
+.letter-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    /* backdrop hơi ám hồng để dịu mắt */
+    background: linear-gradient(rgba(255, 105, 180, 0.15), rgba(0, 0, 0, 0.55));
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90vw;
+    width: 100%;
+    margin: 5vh auto;
+    /* nền thư: ảnh trang trí + họa tiết giấy mịn */
+    background-image:
+        url('hihi.png'),
+        url('hoa.png'),
+        radial-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+        linear-gradient(180deg, #fff5f9 0%, #ffe6f0 100%);
+    background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+    background-position: right 8px bottom 8px, left 8px bottom 8px, 0 0, 0 0;
+    background-size: auto 40%, auto 40%, 6px 6px, 100% 100%;
+    background-blend-mode: normal, normal, soft-light, normal;
+    border-radius: 16px;
+    padding: 20px;
+    border: none;
+    /* dùng viền gradient tùy biến bên dưới */
+    box-shadow: 0 10px 40px rgba(255, 20, 147, 0.25);
+    z-index: 1001;
+}
+
+/* Viền gradient mềm + bo góc, tạo cảm giác sang và nổi bật */
+.modal-content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    /* độ dày của viền */
+    background: linear-gradient(135deg, #ff9ccf, #ffd1e8 45%, #ffc6e0, #ff9ac6);
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Khung trong mảnh để giấy trông tinh tế hơn */
+.modal-content::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: 12px;
+    box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.9), inset 0 0 0 1px rgba(255, 105, 180, 0.25);
+    pointer-events: none;
+}
+
+/* Make the letter a bit bigger on desktop */
+@media (min-width: 992px) {
+    .modal-content {
+        max-width: 680px;
+        width: 90vw;
+    }
+}
+
+@media (max-width: 520px) {
+    .modal-content {
+        max-width: 95vw;
+        width: 100%;
+        padding: 16px;
+        margin: 3vh auto;
+        background-position: right 4px bottom 4px, left 4px bottom 4px, 0 0, 0 0;
+        background-size: auto 28%, auto 28%, 6px 6px, 100% 100%;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 32px;
+    background: transparent;
+    border: none;
+    color: #ff1493;
+    /* hồng tươi */
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.modal-close:hover {
+    color: #e296b2;
+    /* hồng đậm hơn khi hover */
+}
+
+.modal-content h2 {
+    color: #ff1493;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-family: 'Great Vibes', 'Dancing Script', 'Segoe Script', cursive;
+}
+
+.typewriter-container {
+    text-align: left;
+    min-height: 250px;
+    line-height: 1.8;
+    font-size: 18px;
+    color: #3a2a2a;
+    padding: 10px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.typewriter-container .caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    vertical-align: -0.15em;
+    background: linear-gradient(#ff1493, #ff69b4);
+    margin-left: 2px;
+    animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Ensure embedded flower section centers and doesn't override page layout */
+#flower-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Adjust inner flowers container to center visuals and animate from below */
+#flower-container .flowers {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    /* start off-screen (below) so we can animate upward */
+    transform: translateX(-50%) translateY(120vh) scale(0.92) !important;
+    width: min(1100px, 100%);
+    max-width: 95vw;
+    transition: transform 0.9s cubic-bezier(.22, .9, .27, 1);
+}
+
+/* Overlay / modal style for the flower UI when opened */
+#flower-container.active {
+    position: fixed;
+    inset: 0;
+    display: flex !important;
+    /* anchor to bottom so flowers rise from below */
+    align-items: flex-end;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.42);
+    z-index: 2000;
+    padding: 3vh 2vw 1vh;
+    /* reduce top padding, more bottom padding for flowers */
+    overflow: auto;
+}
+
+/* When active, bring the flowers up into view */
+#flower-container.active .flowers {
+    left: 50%;
+    transform: translateX(-50%) translateY(0) scale(1) !important;
+    width: min(1100px, 100%);
+    max-width: 95vw;
+}
+
+/* (Removed custom center-flower overrides to restore original layout/animation.) */
+
+/* Styles for dynamically added extra long flowers */
+.extra-flower {
+    pointer-events: none;
+    will-change: transform, opacity;
+    /* baseline placement kept by inline bottom vmin */
+}
+
+/* grow-up animation: start off-screen (below) and translate into place; use CSS vars for rotation/scale */
+.extra-flower {
+    transform: translateX(-50%) translateY(120vh) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
+    animation: extra-grow 0.9s cubic-bezier(.22, .9, .27, 1) forwards, extra-sway var(--sway-dur, 4s) ease-in-out 1s infinite;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Mobile simplified: use lighter sway animation instead of none */
+#flower-container.mobile-simplified .extra-flower,
+#flower-container.mobile-simplified .extra-flower.no-sway {
+    animation: extra-grow 0.55s cubic-bezier(.22, .9, .27, 1) forwards, mobile-sway 2.5s ease-in-out 0.5s infinite !important;
+}
+
+#flower-container.mobile-simplified .flower__light {
+    display: none !important;
+}
+
+#flower-container.mobile-simplified .attach-branch__leaf {
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+#flower-container.mobile-simplified .night .spark {
+    filter: none !important;
+}
+
+@media (max-width:640px) {
+    #flower-container .extra-flower {
+        animation-duration: 0.85s;
+    }
+}
+
+@keyframes extra-grow {
+    0% {
+        transform: translateX(-50%) translateY(120vh) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateX(-50%) translateY(-8vmin) rotate(var(--rot, 0deg)) scale(calc(var(--scale, 1) * 1.05));
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
+        opacity: 1;
+    }
+}
+
+@keyframes extra-sway {
+    0% {
+        transform: translateX(-50%) translateY(0) rotate(calc(var(--rot, 0deg))) scale(var(--scale, 1));
+    }
+
+    25% {
+        transform: translateX(-50%) translateY(-1.5vmin) rotate(calc(var(--rot, 0deg) + 1deg)) scale(var(--scale, 1));
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(0) rotate(calc(var(--rot, 0deg) - 1deg)) scale(var(--scale, 1));
+    }
+
+    75% {
+        transform: translateX(-50%) translateY(1.5vmin) rotate(calc(var(--rot, 0deg) + 0.5deg)) scale(var(--scale, 1));
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0) rotate(calc(var(--rot, 0deg))) scale(var(--scale, 1));
+    }
+}
+
+@keyframes mobile-sway {
+    0% {
+        transform: translateX(-50%) translateY(0) rotate(calc(var(--rot, 0deg))) scale(var(--scale, 1));
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-1vmin) rotate(calc(var(--rot, 0deg) + 0.8deg)) scale(var(--scale, 1));
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0) rotate(calc(var(--rot, 0deg))) scale(var(--scale, 1));
+    }
+}
+
+/* slightly delay inner leaf animations so leaves appear after stalk grows */
+.extra-flower .leaf,
+.extra-flower .flower__g-front__leaf,
+.extra-flower .flower__grass__leaf {
+    animation-delay: 0.9s !important;
+}
+
+.flower-close {
+    position: fixed;
+    right: 18px;
+    top: 18px;
+    z-index: 2100;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* When not active, keep close button hidden */
+#flower-container:not(.active) .flower-close {
+    display: none;
+}
+
+/* When flower container is shown, allow scrolling if content is tall */
+#flower-container.showing {
+    display: block !important;
+    height: auto;
+}
+
+
+/* Attached branches on each flower, styled like existing front leaves */
+#flower-container .flower .attach-branch {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+#flower-container .attach-branch__leaf {
+    position: absolute;
+    width: 10vmin;
+    height: 10vmin;
+    border-radius: 100% 0% 0% 100%/100% 100% 0% 0%;
+    box-shadow: inset 0 2px 1vmin hsla(184, 97%, 58%, 0.2);
+    background-image: linear-gradient(to bottom left, transparent, var(--dark-color)),
+        linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
+    mask-image: linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
+    opacity: 0.95;
+}
+
+#flower-container .attach-branch__leaf--left {
+    left: -2vmin;
+    bottom: 2vmin;
+    transform-origin: right center;
+    transform: rotate(30deg) scale(0.9);
+}
+
+#flower-container .attach-branch__leaf--right {
+    left: 2vmin;
+    bottom: 3vmin;
+    transform-origin: left center;
+    transform: rotate(-28deg) scale(0.9) rotateY(-180deg);
+}

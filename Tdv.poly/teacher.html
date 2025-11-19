@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kỷ Niệm Lớp - Thầy Cô</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --dark: #0f0f1e;
+      --shadow: 0 15px 40px rgba(0,0,0,0.6);
+      --glow: 0 0 20px rgba(255, 255, 255, 0.6);
+      --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: white;
+      font-family: 'Roboto', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+
+    .bg-effects { display: none; }
+
+    body {
+      background: linear-gradient(180deg, #0b1020 0%, #000 100%);
+    }
+    
+    .opening {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 200;
+    }
+
+    .opening-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      color: white;
+      opacity: 0;
+      transform: translateY(-40px);
+      letter-spacing: 2px;
+      text-shadow: 0 0 30px rgba(255,255,255,0.8);
+      transition: opacity 1.2s ease, transform 1.2s ease, font-size 0.4s ease;
+      margin: 0;
+    }
+
+    .opening-text p {
+      margin-top: 15px;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    @keyframes fadeSlideDown {
+      0% { opacity: 0; transform: translateY(-40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    @keyframes fadeOutOpening {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    .flow-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      animation: showFlow 1.5s 3.5s forwards;
+      perspective: 1000px;
+      overflow: hidden;
+      cursor: grab;
+      z-index: 10;
+    }
+
+    .flow-container:active { cursor: grabbing; }
+
+    @keyframes showFlow { to { opacity: 1; } }
+
+    .flow-line {
+      position: absolute;
+      width: 300%;
+      height: 160px;
+      display: flex;
+      gap: 32px;
+      animation: flowLeft linear infinite;
+      will-change: transform;
+      transition: animation-duration 0.6s ease;
+    }
+
+    .line-1 { top: 6%; animation-duration: 33s; }
+    .line-2 { top: 30%; animation-duration: 40s; animation-delay: 1.5s; }
+    .line-3 { top: 54%; animation-duration: 36s; animation-delay: 0.8s; }
+    .line-4 { top: 78%; animation-duration: 42s; animation-delay: 2.2s; }
+
+    .flow-line:hover { animation-play-state: paused; }
+
+    @keyframes flowLeft {
+      from { transform: translateX(0) translateZ(0); }
+      to { transform: translateX(-66.67%) translateZ(0); }
+    }
+
+    .photo {
+      width: 260px;
+      height: 160px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+      position: relative;
+      transition: var(--transition);
+      will-change: transform, box-shadow, border;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .photo:hover {
+      transform: scale(1.15) translateY(-10px) translateZ(50px) rotateY(5deg);
+      z-index: 20;
+      box-shadow: var(--glow), 0 20px 40px rgba(0,0,0,0.7);
+      border: 3px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .photo img, .photo video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .photo:hover img,
+    .photo:hover video { transform: scale(1.05); }
+
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      color: white;
+      padding: 12px 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition);
+      text-align: center;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.5px;
+    }
+
+    .photo:hover .caption { opacity: 1; transform: translateY(0); }
+
+    .flow-line::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: -100%;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition: left 0.8s ease;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .flow-line:hover::before { left: 200%; }
+
+    .music-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 300;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      cursor: pointer;
+      background: rgba(255,255,255,0.10);
+      border: 2px solid rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      overflow: hidden;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 30px rgba(255,255,255,0.35);
+    }
+
+    .music-btn.playing { animation: rotateBtn 2s linear infinite; }
+
+    @keyframes rotateBtn {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .sound-wave {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: wave 1.7s infinite;
+    }
+
+    .sound-wave:nth-child(2) { animation-delay: 0.3s; }
+    .sound-wave:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes wave {
+      0% { transform: scale(0.8); opacity: 0.7; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    .music-icon { stroke: #ffffff; }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="bg-effects" aria-hidden="true"></div>
+
+  <div class="opening">
+    <div class="opening-text">
+      <h1>Những khoảnh khắc đáng nhớ</h1>
+      <p>bên thầy và lớp mình</p>
+    </div>
+  </div>
+
+
+  <div class="flow-container">
+    <div class="flow-line line-1" id="line1"></div>
+    <div class="flow-line line-2" id="line2"></div>
+    <div class="flow-line line-3" id="line3"></div>
+    <div class="flow-line line-4" id="line4"></div>
+  </div>
+
+
+  <button class="music-btn" id="musicBtn">
+    <svg class="music-icon" width="40" height="40" fill="none" stroke-width="2.5" stroke-linecap="round">
+      <path d="M4 14v12h6l8 8V6l-8 8H4z" stroke="white"/>
+      <path d="M22 12c1.5 2 1.5 10 0 12" stroke="white"/>
+      <path d="M26 8c3 4 3 16 0 20" stroke="white"/>
+    </svg>
+    <span class="sound-wave"></span>
+    <span class="sound-wave"></span>
+    <span class="sound-wave"></span>
+  </button>
+
+  
+  <audio id="bgMusic" loop preload="auto">
+    <source src="anh/nhac.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+
+
+
+    function typeText(el, text, speed = 80, cb) {
+      el.textContent = '';
+      let i = 0;
+      el.style.whiteSpace = 'pre';
+      const t = setInterval(() => {
+        el.textContent += text.charAt(i);
+        i++;
+        if (i >= text.length) {
+          clearInterval(t);
+          if (cb) cb();
+        }
+      }, speed);
+      return t;
+    }
+
+  
+    (function openingSequence(){
+      const opening = document.querySelector('.opening');
+      const heading = opening.querySelector('h1');
+      const para = opening.querySelector('p');
+
+    
+      heading.style.opacity = 0;
+      heading.style.transform = 'translateY(-40px)';
+      para.style.opacity = 0;
+
+    
+      setTimeout(() => {
+        heading.textContent = 'Những khoảnh khắc đáng nhớ';
+        heading.style.fontSize = '4.5rem';
+        heading.style.opacity = 1;
+        heading.style.transform = 'translateY(0)';
+      }, 100);
+
+      
+      setTimeout(() => {
+        heading.style.transition = 'opacity 0.25s ease, transform 0.25s ease, font-size 0.25s ease';
+        heading.style.opacity = 0;
+        heading.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+   
+          heading.style.fontSize = '3rem';
+          heading.style.opacity = 1;
+          heading.style.transform = 'translateY(0)';
+          heading.style.fontFamily = 'Helvetica, Arial, sans-serif';
+          // Adjust speed so the effect lasts about 2 seconds (text length: 16 chars)
+          typeText(heading, 'Khoá 12TN2 - K40', 125);
+        }, 220);
+      }, 1600);
+
+      setTimeout(() => {
+        para.style.opacity = 1;
+      }, 2600);
+
+      setTimeout(() => {
+        opening.style.transition = 'opacity 1s ease, visibility 0s linear 1s';
+        opening.style.opacity = 0;
+        setTimeout(() => {
+          opening.style.visibility = 'hidden';
+          const flow = document.querySelector('.flow-container');
+          if (flow) flow.style.opacity = 1;
+        }, 1000);
+      }, 4200);
+    })();
+
+
+    const memories = [
+      { type: 'img', src: 'anh/anh1.jpg'},
+      { type: 'img', src: 'anh/anh2.jpg'},
+      { type: 'video', src: 'anh/video1.mp4'},
+      { type: 'img', src: 'anh/anh3.jpg'},
+      { type: 'img', src: 'anh/anh4.jpg'},
+      { type: 'img', src: 'anh/anh5.jpg'},
+      { type: 'img', src: 'anh/anh6.jpg'},   
+      { type: 'video', src: 'anh/video2.mp4'},
+      { type: 'img', src: 'anh/anh7.jpg'},
+      { type: 'img', src: 'anh/anh8.jpg'},
+      { type: 'video', src: 'anh/video3.mp4'},
+
+    ];
+
+    const videoTimeMap = new Map();
+
+    function createPhoto(item) {
+      const box = document.createElement('div');
+      box.className = 'photo';
+
+      if (item.type === 'img') {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.caption || 'Ảnh kỷ niệm';
+        img.loading = "lazy";
+        img.onerror = function() {
+          img.style.background = '#222';
+          img.style.color = '#fff';
+          img.style.display = 'flex';
+          img.style.alignItems = 'center';
+          img.style.justifyContent = 'center';
+          img.style.fontSize = '1.2rem';
+          img.src = '';
+          img.textContent = 'Không tải được ảnh';
+        };
+        box.appendChild(img);
+      } else {
+        const video = document.createElement('video');
+        video.src = item.src;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = 'auto';
+   
+        const firstImg = memories.find(m => m.type === 'img');
+        if (firstImg) video.poster = firstImg.src;
+        video.onerror = function() {
+          video.style.background = '#222';
+          video.style.color = '#fff';
+          video.style.display = 'flex';
+          video.style.alignItems = 'center';
+          video.style.justifyContent = 'center';
+          video.style.fontSize = '1.2rem';
+          video.poster = firstImg ? firstImg.src : '';
+        };
+        box.appendChild(video);
+
+        video.addEventListener('loadedmetadata', () => {
+          const saved = videoTimeMap.get(video.src);
+          if (saved && typeof video.duration === 'number' && saved < video.duration) {
+            try { video.currentTime = saved; } catch (e) {}
+          }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.target.tagName && entry.target.tagName.toLowerCase() !== 'video') return;
+            const v = entry.target;
+            if (entry.isIntersecting) {
+          
+              const saved = videoTimeMap.get(v.src);
+              const startPlay = () => v.play().catch(() => {});
+              if (saved && v.readyState < 1) {
+                const onMeta = function() {
+                  if (saved < v.duration) try { v.currentTime = saved; } catch (e) {}
+                  v.removeEventListener('loadedmetadata', onMeta);
+                  startPlay();
+                };
+                v.addEventListener('loadedmetadata', onMeta);
+              } else {
+                if (saved && typeof v.duration === 'number' && saved < v.duration) {
+                  try { v.currentTime = saved; } catch (e) {}
+                }
+                startPlay();
+              }
+            } else {
+          
+              try { videoTimeMap.set(entry.target.src, entry.target.currentTime || 0); } catch (e) {}
+              entry.target.pause();
+            }
+          });
+        }, { threshold: 0.6 });
+        observer.observe(video);
+      }
+
+      const caption = document.createElement("div");
+      caption.className = "caption";
+      caption.textContent = item.caption;
+      box.appendChild(caption);
+
+      return box;
+    }
+
+    function populateLine(id, start = 0, imageSkip = 3, videoSkip = 4, lineIndex = 0, totalLines = 4, usedVideos = new Set(), usedImages = new Set()) {
+      const line = document.getElementById(id);
+
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const tmp = array[i];
+          array[i] = array[j];
+          array[j] = tmp;
+        }
+        return array;
+      }
+
+
+      const videos = memories.filter(m => m.type === 'video');
+      const images = memories.filter(m => m.type === 'img');
+
+      const base = [];
+      let imgCounter = 0;
+      let vidCounter = 0;
+      let imgFallbackIndex = 0; 
+      const localUsed = new Set();
+
+      for (let i = 0; i < memories.length; i++) {
+        const item = memories[(start + i) % memories.length];
+        if (item.type === 'video') {
+          if (videos.length === 0) continue;
+          if (vidCounter % videoSkip === 0) {
+           
+            const preferred = videos.filter(v => !usedVideos.has(v.src) && !localUsed.has(v.src));
+            const fallbackLocal = videos.filter(v => !localUsed.has(v.src));
+            let pick = null;
+
+            if (preferred.length) {
+              pick = preferred[Math.floor(Math.random() * preferred.length)];
+            } else if (fallbackLocal.length) {
+              pick = fallbackLocal[Math.floor(Math.random() * fallbackLocal.length)];
+            }
+
+            if (pick) {
+              base.push(pick);
+              localUsed.add(pick.src);
+              usedVideos.add(pick.src);
+            } else {
+  
+              if (images.length) {
+
+                const preferredImgsForFallback = images.filter(img => !usedImages.has(img.src) && !localUsed.has(img.src));
+                const fallbackImgs = images.filter(img => !localUsed.has(img.src));
+                let imgPick = null;
+                if (preferredImgsForFallback.length) imgPick = preferredImgsForFallback[Math.floor(Math.random() * preferredImgsForFallback.length)];
+                else if (fallbackImgs.length) imgPick = fallbackImgs[Math.floor(Math.random() * fallbackImgs.length)];
+                else imgPick = images[imgFallbackIndex % images.length];
+
+                base.push(imgPick);
+                localUsed.add(imgPick.src);
+                usedImages.add(imgPick.src);
+                imgFallbackIndex++;
+              }
+            }
+          } else {
+
+            if (images.length) {
+
+              const preferredImgs = images.filter(img => !usedImages.has(img.src) && !localUsed.has(img.src));
+              const fallbackImgs = images.filter(img => !localUsed.has(img.src));
+              let pickImg = null;
+              if (preferredImgs.length) pickImg = preferredImgs[Math.floor(Math.random() * preferredImgs.length)];
+              else if (fallbackImgs.length) pickImg = fallbackImgs[Math.floor(Math.random() * fallbackImgs.length)];
+              else pickImg = images[imgFallbackIndex % images.length];
+
+              base.push(pickImg);
+              localUsed.add(pickImg.src);
+              usedImages.add(pickImg.src);
+              imgFallbackIndex++;
+            }
+          }
+          vidCounter++;
+        } else {
+          if (imgCounter % imageSkip === 0) {
+        
+            const preferredImgs = images.filter(img => !usedImages.has(img.src) && !localUsed.has(img.src));
+            const fallbackLocalImgs = images.filter(img => !localUsed.has(img.src));
+            let pickImg = null;
+
+            if (preferredImgs.length) {
+              pickImg = preferredImgs[Math.floor(Math.random() * preferredImgs.length)];
+            } else if (fallbackLocalImgs.length) {
+              pickImg = fallbackLocalImgs[Math.floor(Math.random() * fallbackLocalImgs.length)];
+            } else {
+              pickImg = item; 
+            }
+
+            if (pickImg) {
+              base.push(pickImg);
+              localUsed.add(pickImg.src);
+              usedImages.add(pickImg.src);
+            }
+          }
+          imgCounter++;
+        }
+      }
+
+      let finalBase = base.length ? base.slice() : memories.slice();
+
+      
+      shuffle(finalBase);
+
+      const loop = [];
+      const copies = 3;
+      for (let k = 0; k < copies; k++) {
+        const copy = finalBase.slice();
+        shuffle(copy);
+        loop.push(...copy);
+      }
+
+      loop.forEach(item => line.appendChild(createPhoto(item)));
+    }
+    const usedVideos = new Set();
+    const usedImages = new Set();
+    populateLine("line1", 0, 3, 4, 0, 4, usedVideos, usedImages);
+    populateLine("line2", 2, 3, 4, 1, 4, usedVideos, usedImages);
+    populateLine("line3", 4, 3, 4, 2, 4, usedVideos, usedImages);
+    populateLine("line4", 1, 3, 4, 3, 4, usedVideos, usedImages);
+
+
+    const flowContainer = document.querySelector('.flow-container');
+    flowContainer.addEventListener('mousemove', (e) => {
+      const rect = flowContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const moveX = (x - centerX) / centerX * 15;
+      const moveY = (y - centerY) / centerY * 10;
+
+      document.querySelectorAll('.flow-line').forEach((line, index) => {
+        const speed = (index + 1) * 0.5;
+        line.style.transform = `translateX(${moveX * speed}px) translateY(${moveY * speed}px)`;
+      });
+    });
+
+    flowContainer.addEventListener('mouseleave', () => {
+      document.querySelectorAll('.flow-line').forEach(line => {
+        line.style.transform = '';
+      });
+    });
+
+    const btn = document.getElementById("musicBtn");
+    const audio = document.getElementById("bgMusic");
+
+    btn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play().catch(() => {
+          alert("Vui lòng tương tác trước khi bật nhạc!");
+        });
+        btn.classList.add("playing");
+      } else {
+        audio.pause();
+        btn.classList.remove("playing");
+      }
+    });
+  </script>
+
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var audio = document.getElementById('bgMusic');
+  if (audio) {
+    audio.play().catch(function() {
+      document.body.addEventListener('click', function() {
+        audio.play();
+      }, { once: true });
+    });
+  }
+});
+</script>
+</html>
